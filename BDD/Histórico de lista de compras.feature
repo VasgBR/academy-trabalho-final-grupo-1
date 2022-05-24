@@ -20,7 +20,13 @@ Feature: Histórico de lista de compras
             And clico em uma das listas cadastradas
             Then o sistema deve mostrar todos os itens e quantidades dos produtos cadastrados na lista de compras
             
-            
+        Scenario: Clicar no nome da página
+            When clico em Lembra Compras
+            Then sou direcionado para a aba de lista
+
+        Scenario: Clicar no ícone no caonto superior esquerdo R
+            When clico no ícone principal
+            Then sou direcionado para a aba de lista
 
             
             
