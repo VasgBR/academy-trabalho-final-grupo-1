@@ -10,12 +10,8 @@ Feature: Histórico de lista de compras
         | senha | 123        |
         And já possuo alguma lista já criada no site
 
-        Scenario: Visualizar histórico de listas de compras
+        Scenario: Visualizar o histórico das 10 últimas listas de compras cadastradas por mim
             When clico em Histórico
-            And visualizo o histórico de listas cadastradas por mim
-        
-        Scenario: Visualizar as 10 últimas listas de compras cadastradas
-            When clico em histórico
             And visualizo o nome e data de criação das listas
             Then o sistema deve mostrar apenas as 10 últimas listas cadastradas
             
