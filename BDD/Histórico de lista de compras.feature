@@ -8,10 +8,10 @@ Feature: Histórico de lista de compras
         And faço login no site
         | email | ari@ana.com|
         | senha | 123        |
+        And possuo alguma lista já criada no site
 
         Scenario: Visualizar histórico de listas de compras
             When clico em Histórico
             And visualizo o histórico de listas cadastras
-            And clico no símbolo de Lixeira
-            Then removo um item da lista
+           
 
