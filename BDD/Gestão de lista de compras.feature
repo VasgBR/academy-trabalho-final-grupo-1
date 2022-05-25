@@ -55,6 +55,12 @@ Feature: Gestão de lista de compras
             | quantidade | 0 |
             Then visualizo a mensagem de erro "Informe pelo menos 1 unidade"
 
+        Scenario: Adicionar item na lista com quantidade igual a 1000
+            When adiciono um produto na lista
+            | nomeProduto | Arroz pct 1kg |
+            | quantidade | 1000 |
+            Then visualizo a mensagem de erro "Lista de compras criada com sucesso!"
+
         Scenario: Adicionar item na lista com quantidade maior que 1000
             When adiciono um produto na lista
             | nomeProduto | Arroz pct 1kg |
