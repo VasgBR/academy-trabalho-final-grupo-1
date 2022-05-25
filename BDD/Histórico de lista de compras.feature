@@ -6,8 +6,8 @@ Feature: Histórico de lista de compras
         Background: Acessar o site e fazer o login
         Given acesso o site Lembra Compras
         And faço login no site
-        | email | ari@ana.com|
-        | senha | 123        |
+        |    nomeUsuario     |     Elma Chips      |
+        |    mailUsuario     | elmachips@teste.com |
         And já possuo alguma lista já criada no site
 
         Scenario: Visualizar o histórico das 10 últimas listas de compras cadastradas por mim
