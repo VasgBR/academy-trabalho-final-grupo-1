@@ -4,7 +4,7 @@ Feature: Histórico de lista de compras
     Para visualizar minhas últimas compras
     
         Background: Acessar o site e fazer o login
-        Given acesso o site Lembra Compras
+        Given que acessei o site Lembra Compras
         And faço login no site com os dados já cadastrados
         |    nomeUsuario     |     Elma Chips      |
         |    senhaUsuario    |      Elma1234       |
