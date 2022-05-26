@@ -123,7 +123,7 @@ Feature: Gestão de lista de compras
         When method post
         Then status 201
         * def listaRetorna = call read("hook.feature@listaRetorna")
-        And 
+        And match listaRetorna.response contains { description: "#string", items: [{id: "#string", listId: "#string", name: "Arroz pct 1kg", amount: 2, createdAt: "#string", updatedAt: "#string"}, {id: "#string", listId: "#string", name: "Feijão", amount: 2, createdAt: "#string", updatedAt: "#string"}]}
         * def cancelar = call read("hook.feature@cancelar")
 
         @ignore
@@ -136,9 +136,10 @@ Feature: Gestão de lista de compras
         When method post
         Then status 201
         * def listaRetorna = call read("hook.feature@listaRetorna")
+        And match listaRetorna.response contains { description: "#string", items: [{id: "#string", listId: "#string", name: "Arroz pct 1kg", amount: 6, createdAt: "#string", updatedAt: "#string"}]}
         * def cancelar = call read("hook.feature@cancelar")
 
-        #@ignore
+        @ignore
         Scenario: Aumentar a quantidade dos produtos já criados na lista para ter uma quantidade maior que 1000
         * def payload = { name: "Arroz pct 1kg", amount: 999}
         * def lista = call read("hook.feature@lista")
@@ -146,4 +147,8 @@ Feature: Gestão de lista de compras
         And header X-JWT-Token = userToken
         And request payload
         When method post
-        Then status 200
+        Then status 422
+        And match response contains { error: "Max item amount is 1000."}
+
+        #@ignore
+        Scenario: 
