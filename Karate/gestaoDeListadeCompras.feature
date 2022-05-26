@@ -2,3 +2,148 @@ Feature: Gestão de lista de compras
     Como um usuário com conta no sistema
     Desejo gerenciar uma lista de compras
     Para registrar os produtos que desejo comprar.
+
+    Background: Acessar a tela de Lista
+        Given url baseUrl
+        And path "list"
+        * def criar = call read("hook.feature@criar")
+        * def userEmail = criar.response.email
+        * def login = call read("hook.feature@login")
+        * def userToken = login.response.session.token
+
+        @ignore
+        Scenario: Criar lista de compras com sucesso
+        * def payload = { description: "Compras para a ceia de natal", items: [{name: "Arroz pct 1kg", amount: 2}]}
+        And header X-JWT-Token = userToken
+        And request payload
+        When method post
+        Then status 201
+        * def cancelar = call read("hook.feature@cancelar")
+
+        @ignore
+        Scenario: Criar lista de compras sem descrição
+        * def payload = { description: "", items: [{name: "Arroz pct 1kg", amount: 2}]}
+        And header X-JWT-Token = userToken
+        And request payload
+        When method post
+        Then status 201
+        * def cancelar = call read("hook.feature@cancelar")
+
+        @ignore
+        Scenario: Criar lista de compras sem nenhum item
+        * def payload = {description: ""}
+        And header X-JWT-Token = userToken
+        And request payload
+        When method post
+        Then status 500
+        And match response contains {error: "An error ocurred."}
+        * def cancelar = call read("hook.feature@cancelar")
+
+        @ignore
+        Scenario: Criar lista de compras sem nome do produto
+        * def payload = {description: "", items: [{name: "", amount: 2}]}
+        And header X-JWT-Token = userToken
+        And request payload
+        When method post
+        Then status 400
+        And match response contains {error: "Bad request."}
+        * def cancelar = call read("hook.feature@cancelar")
+
+        @ignore
+        Scenario: Criar lista de compras com quantidade negativa de itens
+        * def payload = {description: "", items: [{name: "Arroz pct 1kg", amount: -2}]}
+        And header X-JWT-Token = userToken
+        And request payload
+        When method post
+        Then status 400
+        And match response contains {error: "Bad request."}
+        * def cancelar = call read("hook.feature@cancelar")
+
+        @ignore
+        Scenario: Criar lista de compras com quantidade igual a 1000
+        * def payload = {description: "", items: [{name: "Arroz pct 1kg", amount: 1000}]}
+        And header X-JWT-Token = userToken
+        And request payload
+        When method post
+        Then status 201
+        * def cancelar = call read("hook.feature@cancelar")
+
+        @ignore
+        Scenario: Criar lista de compras com quantidade acima de 1000
+        * def payload = {description: "", items: [{name: "Arroz pct 1kg", amount: 1001}]}
+        And header X-JWT-Token = userToken
+        And request payload
+        When method post
+        Then status 400
+        And match response contains {error: "Bad request."}
+        * def cancelar = call read("hook.feature@cancelar")
+
+        @ignore
+        Scenario: Criar lista de compras com credenciais inválidas
+        * def payload = { description: "Compras para a ceia de natal", items: [{name: "Arroz pct 1kg", amount: 2}]}
+        And header X-JWT-Token = null
+        And request payload
+        When method post
+        Then status 401
+        And match response contains {status: 401, message: "Required X-JWT-Token header not found."}
+        * def cancelar = call read("hook.feature@cancelar")
+
+        @ignore
+        Scenario: Retorna a lista atualmente ativa quando não existe lista criada
+        And header X-JWT-Token = userToken
+        When method get
+        Then status 200
+        And match response == "#array"
+        * def cancelar = call read("hook.feature@cancelar")
+
+        @ignore
+        Scenario: Retorna a lista atualmente ativa quando existe lista criada
+        * def lista = call read("hook.feature@lista")
+        And header X-JWT-Token = userToken
+        When method get
+        Then status 200
+        And match response contains { description: "#string", items: [{id: "#string", listId: "#string", name: "#string", amount: "#number", createdAt: "#string", updatedAt: "#string"}]}
+        * def cancelar = call read("hook.feature@cancelar")
+
+        @ignore
+        Scenario: Retorna a lista atualmente ativa com credenciais inválidas
+        And header X-JWT-Token = null
+        When method get
+        Then status 401
+        And match response contains {status: 401, message: "Required X-JWT-Token header not found."}
+        * def cancelar = call read("hook.feature@cancelar")
+
+        @ignore
+        Scenario: Adicionar novo item na lista já criada
+        * def payload = { name: "Feijão", amount: 2}
+        * def lista = call read("hook.feature@lista")
+        And path "item"
+        And header X-JWT-Token = userToken
+        And request payload
+        When method post
+        Then status 201
+        * def listaRetorna = call read("hook.feature@listaRetorna")
+        And 
+        * def cancelar = call read("hook.feature@cancelar")
+
+        @ignore
+        Scenario: Aumentar a quantidade dos produtos já criados na lista
+        * def payload = { name: "Arroz pct 1kg", amount: 4}
+        * def lista = call read("hook.feature@lista")
+        And path "item"
+        And header X-JWT-Token = userToken
+        And request payload
+        When method post
+        Then status 201
+        * def listaRetorna = call read("hook.feature@listaRetorna")
+        * def cancelar = call read("hook.feature@cancelar")
+
+        #@ignore
+        Scenario: Aumentar a quantidade dos produtos já criados na lista para ter uma quantidade maior que 1000
+        * def payload = { name: "Arroz pct 1kg", amount: 999}
+        * def lista = call read("hook.feature@lista")
+        And path "item"
+        And header X-JWT-Token = userToken
+        And request payload
+        When method post
+        Then status 200
