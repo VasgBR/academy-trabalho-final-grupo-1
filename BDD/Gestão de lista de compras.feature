@@ -4,7 +4,7 @@ Feature: Gestão de lista de compras
     Para registrar os produtos que desejo comprar.
 
     Background: Acessar o site e fazer o login
-        Given acesso o site Lembra Compras e estou na página de Lista
+        Given acessei o site Lembra Compras e estou na página de Lista
 
         Scenario: Remover um item da lista
             When adiciono um produto na lista

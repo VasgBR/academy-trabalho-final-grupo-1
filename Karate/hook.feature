@@ -34,6 +34,14 @@ Feature: Hooks
     When method post
     Then status 201
 
+    @listaRetorna
+    Scenario: Retorna lista
+    Given url baseUrl
+    And path "list"
+    And header X-JWT-Token = userToken
+    When method get
+    Then status 200 
+
     @cancelar
     Scenario: Cancelar conta
     Given url baseUrl
