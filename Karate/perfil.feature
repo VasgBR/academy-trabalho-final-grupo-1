@@ -7,9 +7,9 @@ Feature: Perfil
         Given url baseUrl 
         And path "users"
         
-        Scenario: 
+        Scenario: Atualizar nome com sucesso
             And header X-JWT-Token = logar.response.token 
-            And request (nome: "Elma Chips", email: "elmachips@teste.com")
+            And request (nome: "Elma Chips") 
             When method put
             Then status 200
             And match response contains () 
