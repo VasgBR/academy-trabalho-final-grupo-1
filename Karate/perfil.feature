@@ -28,5 +28,3 @@ Feature: Perfil
             When method put 
             Then status 200
             And match response contains {id: "#string", name: "Elma Chips", email: "#(userEmail)", is_admin: "#boolean", createdAt: "#string", updatedAt: "#string"} 
-
-             
