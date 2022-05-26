@@ -31,12 +31,12 @@ Feature: Gestão de lista de compras
 
         @ignore
         Scenario: Criar lista de compras sem nenhum item
-            * def payload = {description: ""}
+            * def payload = {description: "", items: [{name: "", amount: 0}]}
             And header X-JWT-Token = userToken
             And request payload
             When method post
-            Then status 500
-            And match response contains {error: "An error ocurred."}
+            Then status 400
+            And match response contains {error: "Bad request."}
             * def cancelar = call read("hook.feature@cancelar")
 
         @ignore
