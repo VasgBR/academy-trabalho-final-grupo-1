@@ -28,14 +28,14 @@
               {
                 "id": "#string", 
                 "listId": "#string", 
-                "name": "Arroz pct 1kg", 
+                "name": "Cebolitos", 
                 "amount": 2, 
                 "createdAt": "#string", 
                 "updatedAt": "#string"}, 
               {
                 "id": "#string", 
                 "listId": "#string", 
-                "name": "Feijão", 
+                "name": "Ruffles", 
                 "amount": 2, 
                 "createdAt": "#string", 
                 "updatedAt": "#string"
@@ -48,7 +48,7 @@
               {
                 "id": "#string",
                 "listId": "#string", 
-                "name": "Arroz pct 1kg", 
+                "name": "Cebolitos", 
                 "amount": 6, 
                 "createdAt": "#string",
                  "updatedAt": "#string"
