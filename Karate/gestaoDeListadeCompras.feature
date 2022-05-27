@@ -102,7 +102,7 @@ Feature: Gestão de lista de compras
             And header X-JWT-Token = userToken
             When method get
             Then status 200
-            And match response contains { description: "#string", items: [{id: "#string", listId: "#string", name: "#string", amount: "#number", createdAt: "#string", updatedAt: "#string"}]}
+            And match response contains read("responseBody.json")["gestao"][0]
             * def cancelar = call read("hook.feature@cancelar")
 
         @ignore
@@ -123,7 +123,7 @@ Feature: Gestão de lista de compras
             When method post
             Then status 201
             * def listaRetorna = call read("hook.feature@listaRetorna")
-            And match listaRetorna.response contains { description: "#string", items: [{id: "#string", listId: "#string", name: "Arroz pct 1kg", amount: 2, createdAt: "#string", updatedAt: "#string"}, {id: "#string", listId: "#string", name: "Feijão", amount: 2, createdAt: "#string", updatedAt: "#string"}]}
+            And match listaRetorna.response contains read("responseBody.json")["gestao"][1]
             * def cancelar = call read("hook.feature@cancelar")
 
         @ignore
@@ -136,7 +136,7 @@ Feature: Gestão de lista de compras
             When method post
             Then status 201
             * def listaRetorna = call read("hook.feature@listaRetorna")
-            And match listaRetorna.response contains { description: "#string", items: [{id: "#string", listId: "#string", name: "Arroz pct 1kg", amount: 6, createdAt: "#string", updatedAt: "#string"}]}
+            And match listaRetorna.response contains read("responseBody.json")["gestao"][2]
             * def cancelar = call read("hook.feature@cancelar")
 
         @ignore
