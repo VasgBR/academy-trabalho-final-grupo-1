@@ -26,7 +26,7 @@ Feature: Hooks
 
     @lista
     Scenario: Lista
-        * def payloadLista = { description: "Compras para a ceia de natal", items: [{name: "Arroz pct 1kg", amount: 2}]}
+        * def payloadLista = { description: "Elma Chips Favoritos", items: [{name: "Cebolitos", amount: 2}]}
         Given url baseUrl
         And path "list"
         And header X-JWT-Token = userToken
