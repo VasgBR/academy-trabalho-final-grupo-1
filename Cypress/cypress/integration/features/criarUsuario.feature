@@ -190,8 +190,3 @@ Feature: Criar usuário
             Given acessei a página de registro de usuário
             When clico no botão Voltar à pagina de login
             Then retorno à pagina de login
-
-            
-
-        
-    

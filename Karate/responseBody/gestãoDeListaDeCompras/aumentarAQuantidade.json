@@ -1,0 +1,13 @@
+{
+    "description": "#string",
+    "items": [
+      {
+        "id": "#string",
+        "listId": "#string", 
+        "name": "Cebolitos", 
+        "amount": 6, 
+        "createdAt": "#string",
+         "updatedAt": "#string"
+      }
+    ]
+}
