@@ -18,13 +18,8 @@ Feature: Perfil
             And request payload 
             When method put
             Then status 200
-            And match response contains {
-                id: "#string", 
-                name: "Elma Chips Queijo", 
-                email: "#(userEmail)", 
-                is_admin: "#boolean", 
-                createdAt: "#string", 
-                updatedAt: "#string"}
+            And match response == "#object"
+            And match response contains {id: "#string", name: "Elma Chips Queijo", email: "#(userEmail)", is_admin: "#boolean", createdAt: "#string", updatedAt: "#string"}
             * def cancelar = call read("hook.feature@cancelar")
 
         @ignore
@@ -34,20 +29,15 @@ Feature: Perfil
             And request payload 
             When method put 
             Then status 200
-            And match response contains {
-                id: "#string", 
-                name: "Elma Chips", 
-                email: "#(userEmail)",
-                is_admin: "#boolean", 
-                createdAt: "#string", 
-                updatedAt: "#string"} 
+            And match response == "#object"
+            And match response contains {id: "#string", name: "Elma Chips", email: "#(userEmail)", is_admin: "#boolean", createdAt: "#string", updatedAt: "#string"} 
             * def cancelar = call read("hook.feature@cancelar")
 
         #@ignore
         Scenario: Novo e-mail não pode ser existente
-            * def criar2 = call read("hook.feature@criar")
-            * def userEmail2 = criar2.response.email 
-            And header X--JWT-Token = userToken
+            * def criarDois = call read("hook.feature@criar")
+            * def userEmail2 = criarDois.response.email
+            And header X-JWT-Token = userToken
             And request {name: "Elma Chips", email: "#(userEmail2)"} 
             When method put
             Then status 422
@@ -60,13 +50,8 @@ Feature: Perfil
             And request payload
             When method put 
             Then status 200
-            And match response contains {
-                id: "#string", 
-                name: "Elma Chipsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss", 
-                email: "#(userEmail)", 
-                is_admin: "#boolean", 
-                createdAt: "#string", 
-                updatedAt: "#string"}
+            And match response == "#object"
+            And match response contains {id: "#string", name: "Elma Chipsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss", email: "#(userEmail)", is_admin: "#boolean", createdAt: "#string",updatedAt: "#string"}
             * def cancelar = call read("hook.feature@cancelar")
 
         @ignore
@@ -76,13 +61,8 @@ Feature: Perfil
             And request payload
             When method put 
             Then status 200
-            And match response contains {
-                id: "#string", 
-                name: "Elma Chips", 
-                email: "elmachipssssssssssssssssssssssssssssssssssssssssss@teste.com", 
-                is_admin: "#boolean", 
-                createdAt: "#string", 
-                updatedAt: "#string"}
+            And match response == "#object"
+            And match response contains {id: "#string", name: "Elma Chips", email: "elmachipssssssssssssssssssssssssssssssssssssssssss@teste.com", is_admin: "#boolean", createdAt: "#string", updatedAt: "#string"}
             * def cancelar = call read("hook.feature@cancelar")     
 
         @ignore
@@ -92,6 +72,7 @@ Feature: Perfil
             And request payload
             When method put
             Then status 400
+            And match response == "#object"
             And match response contains {error: "Bad request."}
             * def cancelar = call read("hook.feature@cancelar")
 
@@ -102,26 +83,9 @@ Feature: Perfil
             And request payload 
             When method put 
             Then status 400
+            And match response == "#object"
             And match response contains {error: "Bad request."}
             * def cancelar = call read("hook.feature@cancelar")
- 
-        # Scenario: O nome deve conter no mínimo 4 letras
-        #     * def payload = {name: "Elm", email: "#(userEmail)"}
-        #     And header X-JWt-Token = userToken
-        #     And request payload
-        #     When method put 
-        #     Then status 400
-        #     And match response contains {error: "Bad request."}
-        #     * def cancelar = call read("hook.feature@cancelar")
-
-        # Scenario: Inserindo caractere especial no nome
-        #     * def payload = {name: "Elm%", email: "#(userEmail)"}
-        #     And header X-JWT-Token = userToken
-        #     And request payload 
-        #     When method put
-        #     Then status 400
-        #     And match response contains {error: "Bad request."}
-        #     * def cancelar = call read("hook.feature@cancelar")
 
         @ignore
         Scenario: Inserindo email inválido 
@@ -130,7 +94,19 @@ Feature: Perfil
             And request payload
             When method put
             Then status 400
+            And match response == "#object"
             And match response contains {error: "Bad request."}
+
+        @ignore
+        Scenario: Inserindo usuário já cadastrado 
+            * def payload = {name: "Elma chips", email: "elma@"}
+            And header X-JWT-Token = null
+            And request payload
+            When method put 
+            Then status 404
+            And match response == "#object"
+            And match response contains {error: "User not found."} 
+
 
 
 
