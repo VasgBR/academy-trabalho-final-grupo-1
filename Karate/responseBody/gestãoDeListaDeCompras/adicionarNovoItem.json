@@ -1,0 +1,20 @@
+{ 
+    "description": "#string", 
+    "items": [
+      {
+        "id": "#string", 
+        "listId": "#string", 
+        "name": "Cebolitos", 
+        "amount": 2, 
+        "createdAt": "#string", 
+        "updatedAt": "#string"}, 
+      {
+        "id": "#string", 
+        "listId": "#string", 
+        "name": "Ruffles", 
+        "amount": 2, 
+        "createdAt": "#string", 
+        "updatedAt": "#string"
+      }
+    ]
+  }
