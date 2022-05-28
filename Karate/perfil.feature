@@ -33,7 +33,7 @@ Feature: Perfil
             And match response contains {id: "#string", name: "Elma Chips", email: "#(userEmail)", is_admin: "#boolean", createdAt: "#string", updatedAt: "#string"} 
             * def cancelar = call read("hook.feature@cancelar")
 
-        #@ignore
+        @ignore
         Scenario: Novo e-mail não pode ser existente
             * def criarDois = call read("hook.feature@criar")
             * def userEmail2 = criarDois.response.email
