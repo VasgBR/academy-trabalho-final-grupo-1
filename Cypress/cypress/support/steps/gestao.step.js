@@ -1,7 +1,19 @@
 import { gestaoPage } from '../pages/gestaoPage.po'
 
+before(() => {
+    gestaoPage.usuario();
+})
+
+afterEach(() => {
+    gestaoPage.deslogar();
+})
+
 Given('acessei o site Lembra Compras e estou na página de Lista', () => {
     gestaoPage.paginaLista();
+})
+
+Given('tenho uma lista criada', () => {
+    gestaoPage.listaCriada();
 })
 
 When('adiciono um produto na lista', (tabela) => {
@@ -76,7 +88,20 @@ When('salvo a lista adicionando um outro produto na lista', (tabela) => {
 
 When('adiciono outro produto na lista', (tabela) => {
     var dadosTabela = tabela.rowsHash();
-    gestaoPage.outroProduto(dadosTabela.nomeProduto, dadosTabela.quantidade)
+    gestaoPage.outroProduto(dadosTabela.nomeProduto, dadosTabela.quantidade);
+})
+
+When('adiciono o mesmo produto na lista para ter uma quantidade maior que 1000', (tabela) => {
+    var dadosTabela = tabela.rowsHash();
+    gestaoPage.produto1000(dadosTabela.nomeProduto, dadosTabela.quantidade);
+})
+
+When('cancelo a finalização da lista', (tabela) => {
+    gestaoPage.cancelarLista();
+})
+
+When('atualizo a página', () => {
+    gestaoPage.atualizarPagina();
 })
 
 Then('removo um item da lista', () => {
@@ -106,4 +131,16 @@ Then('o sistema deve somar a quantidade dos produtos adicionados', () => {
 
 Then('o sistema deve me apresentar os dois produtos na lista', () => {
     gestaoPage.produtosNaLista();
+})
+
+Then('volto para a página de Lista', () => {
+    gestaoPage.paginaListaCriada();
+})
+
+Then('o item continua riscado', () => {
+    gestaoPage.itemRiscado();
+})
+
+Then('visualizo a mensagem de sucesso após adicionar o segundo item {string}', (mensagemSucesso) => {
+    gestaoPage.mensagemErro(mensagemSucesso);
 })
