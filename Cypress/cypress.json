@@ -1,3 +1,5 @@
 {
-    "testFiles": "**/*.feature"
+    "testFiles": "**/*.feature",
+    "experimentalSessionAndOrigin": true,
+    "failOnStatusCode": false
 }

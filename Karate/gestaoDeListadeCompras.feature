@@ -112,7 +112,7 @@ Feature: Gestão de lista de compras
             And match response == "#array"
             * def cancelar = call read("hook.feature@cancelar")
 
-        # @ignore
+        @ignore
         Scenario: Retorna a lista atualmente ativa quando existe lista criada
             * def lista = call read("hook.feature@lista")
             And header X-JWT-Token = userToken
