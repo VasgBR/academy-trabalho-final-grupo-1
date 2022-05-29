@@ -99,7 +99,7 @@ Feature: Perfil
 
         @ignore
         Scenario: Inserindo usuário já cadastrado 
-            * def payload = {name: "Elma chips", email: "elma@"}
+            * def payload = {name: "Elma chips", email: "elma@chips.com"}
             And header X-JWT-Token = null
             And request payload
             When method put 

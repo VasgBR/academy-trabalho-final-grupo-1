@@ -1,4 +1,4 @@
 {
-    "baseUrl": "https://lista-compras-api.herokuapp.com/api/v1",
+    "baseUrl": "https://academy-lembra-compras.herokuapp.com",
     "testFiles": "**/*.feature"
 }
