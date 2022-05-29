@@ -13,6 +13,7 @@ Feature: Criar usuário
             |    senhaUsuario    |      Elma1234       |
             |  ConfSenhaUsuario  |      Elma1234       |
             Then visualizo a mensagem "Usuário criado com sucesso!"
+            And sou direcionado para a página de login
 
         Scenario: Cadastrar usuário sem nome
             When registro os dados do usuário sem preencher o campo nome
@@ -21,6 +22,7 @@ Feature: Criar usuário
             |    senhaUsuario    |      Elma1234       |
             |  ConfSenhaUsuario  |      Elma1234       |
             Then visualizo a mensagem "Informe seu nome"
+            And permaneço na página de registro do usuário
 
         Scenario: Cadastrar usuário sem email
             When registro os dados do usuário sem preencher o campo email
@@ -29,6 +31,7 @@ Feature: Criar usuário
             |    senhaUsuario    |      Elma1234       |
             |  ConfSenhaUsuario  |      Elma1234       |
             Then visualizo a mensagem "Informe seu e-mail"
+            And permaneço na página de registro do usuário
 
         Scenario: Cadastrar usuário sem senha
             When registro os dados do usuário sem preencher o campo senha
@@ -37,6 +40,7 @@ Feature: Criar usuário
             |    senhaUsuario    |                     |
             |  ConfSenhaUsuario  |      Elma1234       |
             Then visualizo a mensagem "Informe sua senha"
+            And permaneço na página de registro do usuário
 
         Scenario: Cadastrar usuário sem confirmar senha
             When registro os dados do usuário sem preencher o campo confirmar senha
@@ -45,6 +49,7 @@ Feature: Criar usuário
             |    senhaUsuario    |      Elma1234       |
             |  ConfSenhaUsuario  |                     |
             Then visualizo a mensagem "Informe sua senha"
+            And permaneço na página de registro do usuário
 
         Scenario: Cadastrar usuário com um email já existente
             And o sistema possui um usuário cadastrado com os seguintes dados
@@ -58,6 +63,7 @@ Feature: Criar usuário
             |    senhaUsuario    |      Elma1234       |
             |  ConfSenhaUsuario  |      Elma1234       |
             Then visualizo a mensagem "Este e-mail já é utilizado por outro usuário."
+            And permaneço na página de registro do usuário
 
         Scenario: Cadastrar usuário com formato de email inválido sem arroba
             When registro os dados do usuário com email em formato inválido
@@ -66,7 +72,7 @@ Feature: Criar usuário
             |    senhaUsuario    |      Elma1234       |
             |  ConfSenhaUsuario  |      Elma1234       |
             Then visualizo a mensagem "Formato de e-mail inválido." 
-            And visualizo a mensagem "Inclua um '@' no endereço de email. 'elmachips' está com um '@' faltando." 
+            And permaneço na página de registro do usuário
 
         Scenario: Cadastrar usuário com formato de email inválido sem texto após arroba
             When registro os dados do usuário com email em formato inválido 
@@ -75,7 +81,7 @@ Feature: Criar usuário
             |    senhaUsuario    |      Elma1234       |
             |  ConfSenhaUsuario  |      Elma1234       |
             Then visualizo a mensagem "Formato de e-mail inválido." 
-            And visualizo a mensagem "Insira uma parte depois de '@'. 'elmachips@' está incompleto."     
+            And permaneço na página de registro do usuário
 
         Scenario: Cadastrar usuário com formato de email inválido sem texto após o ponto
             When registro os dados do usuário com email em formato inválido
@@ -84,7 +90,7 @@ Feature: Criar usuário
             |    senhaUsuario    |      Elma1234       |
             |  ConfSenhaUsuario  |      Elma1234       |
             Then visualizo a mensagem "Formato de e-mail inválido." 
-            And visualizo a mensagem "'.' está sendo usado em uma posição incorreta em 'teste.'."     
+            And permaneço na página de registro do usuário    
 
         Scenario: Cadastrar usuário com nome contendo menos de quatro caracteres
             When registro os dados do usuário com nome contendo menos de quatro caracteres
@@ -93,6 +99,7 @@ Feature: Criar usuário
             |    senhaUsuario    |      Elma1234       |
             |  ConfSenhaUsuario  |      Elma1234       |
             Then visualizo a mensagem "Informe seu nome completo"   
+            And permaneço na página de registro do usuário
 
         Scenario: Cadastrar usuário com nome com formato inválido
             When registro os dados do usuário com nome com formato inválido
@@ -101,25 +108,26 @@ Feature: Criar usuário
             |    senhaUsuario    |      Elma1234       |
             |  ConfSenhaUsuario  |      Elma1234       |
             Then visualizo a mensagem "Formato do nome é inválido."   
+            And permaneço na página de registro do usuário
 
         Scenario: Visualizar senha no campo senha
-            When registro os dados do usuário 
+            When preencho os dados do usuário 
             |    nomeUsuario     |     Elma Chips      |
             |    mailUsuario     | elmachips@teste.com |
             |    senhaUsuario    |      Elma1234       |
             |  ConfSenhaUsuario  |      Elma1234       |
             And clico no ícone olho do campo senha
-            Then visualizo a senha do usuário 
+            Then visualizo a senha do usuário no campo senha
             |    senhaUsuario    |      Elma1234       |
 
         Scenario: Visualizar senha no campo confirmar senha
-            When registro os dados do usuário 
+            When preencho os dados do usuário 
             |    nomeUsuario     |     Elma Chips      |
             |    mailUsuario     | elmachips@teste.com |
             |    senhaUsuario    |      Elma1234       |
             |  ConfSenhaUsuario  |      Elma1234       |
             And clico no ícone olho do campo confirmar senha
-            Then visualizo a senha do usuário 
+            Then visualizo a senha do usuário no campo confirmar senha
             |  ConfSenhaUsuario  |      Elma1234       |
 
         Scenario: Cadastrar usuário com nome contendo 100 caracteres
@@ -129,6 +137,8 @@ Feature: Criar usuário
             |    senhaUsuario    |                                     Elma1234                                                         |
             |  ConfSenhaUsuario  |                                     Elma1234                                                         |
             Then visualizo a mensagem "Usuário criado com sucesso!"
+            And sou direcionado para a página de login
+
 
         Scenario: Cadastrar usuário com nome contendo 101 caracteres
             When registro os dados do usuário com nome contendo 101 caracteres
@@ -137,6 +147,8 @@ Feature: Criar usuário
             |    senhaUsuario    |                                     Elma1234                                                          |
             |  ConfSenhaUsuario  |                                     Elma1234                                                          |
             Then visualizo a mensagem "Informe no máximo 100 letras no seu nome"
+            And permaneço na página de registro do usuário
+
 
         Scenario: Cadastrar usuário com email contendo 60 caracteres
             When registro os dados do usuário com email contendo 60 caracteres
@@ -145,6 +157,7 @@ Feature: Criar usuário
             |    senhaUsuario    |                          Elma1234                            |
             |  ConfSenhaUsuario  |                          Elma1234                            |
             Then visualizo a mensagem "Usuário criado com sucesso!"
+            And sou direcionado para a página de login
 
         Scenario: Cadastrar usuário com email contendo 61 caracteres
             When registro os dados do usuário com email contendo 61 caracteres
@@ -153,6 +166,7 @@ Feature: Criar usuário
             |    senhaUsuario    |                          Elma1234                             |
             |  ConfSenhaUsuario  |                          Elma1234                             |
             Then visualizo a mensagem "Informe no máximo 60 caracteres."
+            And permaneço na página de registro do usuário
 
         Scenario: Cadastrar usuário com senha contendo 30 caracteres
             When registro os dados do usuário com senha contendo 30 caracteres
@@ -161,6 +175,7 @@ Feature: Criar usuário
             |    senhaUsuario    | Elma12344444444444444444444444 |
             |  ConfSenhaUsuario  | Elma12344444444444444444444444 |
             Then visualizo a mensagem "Usuário criado com sucesso"    
+            And sou direcionado para a página de login
 
         Scenario: Cadastrar usuário com campo senha contendo 31 caracteres
             When registro os dados do usuário com senha contendo 31 caracteres
@@ -168,7 +183,8 @@ Feature: Criar usuário
             |    mailUsuario     |      elmachips@teste.com        |
             |    senhaUsuario    | Elma123444444444444444444444444 |
             |  ConfSenhaUsuario  | Elma12344444444444444444444444  |
-            Then visualizo a mensagem "Informe no máximo 30 caracteres."     
+            Then visualizo a mensagem "Informe no máximo 30 caracteres."
+            And permaneço na página de registro do usuário     
 
         Scenario: Cadastrar usuário com campo confirmar senha contendo 31 caracteres
             When registro os dados do usuário com senha contendo 31 caracteres no campo confirmar senha
@@ -177,6 +193,7 @@ Feature: Criar usuário
             |    senhaUsuario    | Elma12344444444444444444444444  |
             |  ConfSenhaUsuario  | Elma123444444444444444444444444 |
             Then visualizo a mensagem "Informe no máximo 30 caracteres." 
+            And permaneço na página de registro do usuário
 
         Scenario: Cadastrar usuário com senhas diferentes nos campos senha e confirmar senha
             When registro senhas diferentes no campo senha e confirmar senha
@@ -185,8 +202,8 @@ Feature: Criar usuário
             |    senhaUsuario    |      Elma1234        |
             |  ConfSenhaUsuario  |      Elma12345       |
             Then visualizo a mensagem "As senhas não conferem."
+            And permaneço na página de registro do usuário
 
         Scenario: Retornar à página de login
-            Given acessei a página de registro de usuário
             When clico no botão Voltar à pagina de login
-            Then retorno à pagina de login
+            Then sou direcionado para a página de login

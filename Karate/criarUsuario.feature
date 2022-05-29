@@ -138,3 +138,5 @@ Feature: Criar usuário
             Then status 400
             And match response == "#object"
             And match response contains {"error": "Bad request."}
+
+
