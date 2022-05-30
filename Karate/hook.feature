@@ -41,6 +41,14 @@ Feature: Hooks
         And header X-JWT-Token = userToken
         When method get
         Then status 200 
+    
+    @listaInativa
+    Scenario: Desativar lista
+          Given url baseUrl
+        And path "list"
+        And header X-JWT-Token = userToken
+        When method patch
+        Then status 204
 
     @cancelar
     Scenario: Cancelar conta
@@ -49,3 +57,5 @@ Feature: Hooks
         And header X-JWT-Token = userToken
         When method delete
         Then status 204
+
+    
