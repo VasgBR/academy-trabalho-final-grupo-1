@@ -10,7 +10,7 @@ class perfilUsuario {
     registrarUsuario() {
         cy.visit("https://academy-lembra-compras.herokuapp.com/register");
         cy.get(this.nameUsuario).type("Elma Chips");
-        cy.get(this.emailUsuario).type("elmachips@teste.com");
+        cy.get(this.emailUsuario).type("elmachips@presunto.com");
         cy.get(this.senhaUsuario).type("Elma1234");
         cy.get(this.confirmarSenhaUsuario).type("Elma1234");
         cy.contains("button", "Registrar").click({force: true});
@@ -23,7 +23,7 @@ class perfilUsuario {
     }
     logarUsuario() {
         cy.visit("/login");
-        cy.get(this.emailUsuario).type("elmachips@teste.com");
+        cy.get(this.emailUsuario).type("elmachips@presunto.com");
         cy.get(this.senhaUsuario).type("Elma1234");
         cy.contains("Entrar").click();
     }

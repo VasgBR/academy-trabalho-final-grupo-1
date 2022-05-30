@@ -19,7 +19,7 @@ Feature: Perfil
 
         Scenario: Novo e-mail não pode ser existente 
             When insiro um email já cadastrado 
-            | email | elmachips@teste.com |
+            | email | elmachips@presunto.com |
             Then visualizo a mensagem "Este e-mail já é utilizado por outro usuário."
         
         Scenario: Atualizar usuário com nome contendo 100 caracteres
@@ -34,17 +34,17 @@ Feature: Perfil
             
         Scenario: Atualizar usuário com email contendo 60 caracteres
             When atualizo o email do usuário para conter 60 caracteres 
-            | email | elmachipssssssssssssssssssssssssssssssssssssssssss@teste.com |
+            | email | elmachipssssssssssssssssssssssssssssssssssssssssss@presunto.com |
             Then visualizo a mensagem "Informações atualizadas com sucesso!"
 
         Scenario: Atualizar usuário com email contendo 61 caracteres
             When atualizo o email do usuário para conter 61 caracteres
-            | email | elmachipsssssssssssssssssssssssssssssssssssssssssss@teste.com |  
+            | email | elmachipsssssssssssssssssssssssssssssssssssssssssss@presunto.com |  
             Then visualizo a mensagem "Informe no máximo 60 letras no seu email"
             
         Scenario: Atualizar usuário com email contendo 101 caracteres
             When atualizo o email do usuário para conter 101 caracteres
-            | email | elmachipsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss@teste.com |  
+            | email | elmachipsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss@presunto.com |  
             Then visualizo a mensagem "Informe no máximo 100 caracteres."
         
         Scenario: O nome deve conter no mínimo 4 letras
