@@ -8,27 +8,27 @@ class HistoricoPage {
     confirmar = '.iMjKmA'
     listagem = ".kUIcKA"
     menu = '.bgBaRw'
+    
 
     cadastro(){
         cy.visit('https://academy-lembra-compras.herokuapp.com/register');
         cy.get(this.nome).type('Elma Chips');
-        cy.get(this.email).type('el@ta1.com');
-        cy.get(this.senha).type('123');
-        cy.get(this.confirmaSenha).type('123');
+        cy.get(this.email).type('el@t4111.com');
+        cy.get(this.senha).type('1234');
+        cy.get(this.confirmaSenha).type('1234');
         cy.contains("button", 'Registrar').click();
     }
 
     login(){
         cy.visit('https://academy-lembra-compras.herokuapp.com/login');
-        cy.get(this.email).type('el@ta1.com');
-        cy.get(this.senha).type('123');
+        cy.get(this.email).type('el@t4111.com');
+        cy.get(this.senha).type('1234');
         cy.contains('Entrar').click(); 
     }
 
-    adicionarItem(produto, quantidade){
-        cy.get(this.nome).type(produto);
-        cy.get(this.quantidade).clear().type(quantidade);
-        cy.contains('button', '+').click();
+    //criarOnzeListas??
+
+    salvarLista() {
         cy.contains('Salvar').click();
     }
 
@@ -41,10 +41,7 @@ class HistoricoPage {
 
     }
 
-    salvarLista(){
-        cy.contains('Salvar').click();  
-    }
-
+   
     paginaListaCriada(){
         cy.contains('Finalizar a lista').should('be.visible');
         cy.contains('Finalizar a lista').click().get('.iMjKmA').click();

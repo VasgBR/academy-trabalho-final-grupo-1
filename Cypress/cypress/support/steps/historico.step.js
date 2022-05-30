@@ -4,9 +4,9 @@ before(() => {
     historicoPage.cadastro();
 })
 
-afterEach(() => {
-    historicoPage.deslogar();
-})
+//afterEach(() => {
+  //  historicoPage.deslogar();
+//})
 
 Given('que acessei o site Lembra Compras', () =>{
     historicoPage.login();

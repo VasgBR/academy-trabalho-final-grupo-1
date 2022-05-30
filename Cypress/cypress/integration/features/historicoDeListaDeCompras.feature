@@ -10,7 +10,7 @@ Feature: Histórico de lista de compras
 
             Scenario: Visualizar o histórico das 10 últimas listas de compras cadastradas por mim
                 Then o sistema deve mostrar o nome e a data de criação apenas das 10 últimas listas cadastradas
-            
+                            
             Scenario: Visualizar itens de uma lista de compra
                 When clico em uma das listas cadastradas
                 Then o sistema mostra todos os itens e quantidades dos produtos cadastrados na lista de compras
