@@ -16,7 +16,7 @@ Feature: Criar usuário
             Then status 201
             * def idGerado = response.id
             And match response == "#object"
-            And match response contains {name: "Elma Chips", email: "#(emailRandom)", id: "#(idGerado)", is_admin: "#boolean"}
+            And match response contains read("responseBody/criarUsuario/cadastrarUsuarioComSucesso.json")
             * def userEmail = response.email
             * def login = call read("hook.feature@login")
             * def userToken = login.response.session.token
@@ -98,7 +98,7 @@ Feature: Criar usuário
             Then status 201
             * def idGerado = response.id
             And match response == "#object"
-            And match response contains {name: "Elma Chipsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss", email: "#(emailRandom)", id: "#(idGerado)", is_admin: "#boolean"}
+            And match response contains read("responseBody/criarUsuario/nomeContendo100Caracteres.json")
             * def userEmail = response.email
             * def login = call read("hook.feature@login")
             * def userToken = login.response.session.token
@@ -123,7 +123,7 @@ Feature: Criar usuário
             Then status 201
             * def idGerado = response.id
             And match response == "#object"
-            And match response contains {name: "Elma Chips", email: "#(emailRandom)", id: "#(idGerado)", is_admin: "#boolean"}
+            And match response contains read("responseBody/criarUsuario/emailContendo60Caracteres.json")
             * def userEmail = response.email
             * def login = call read("hook.feature@login")
             * def userToken = login.response.session.token

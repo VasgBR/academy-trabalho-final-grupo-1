@@ -165,7 +165,7 @@ Feature: Criar usuário
             |    mailUsuario     | elmachipsssssssssssssssssssssssssssssssssssssssssss@teste.com |
             |    senhaUsuario    |                          Elma1234                             |
             |  ConfSenhaUsuario  |                          Elma1234                             |
-            Then visualizo a mensagem "Informe no máximo 60 caracteres."
+            Then visualizo a mensagem "Informe no máximo 60 letras no seu e-mail"
             And permaneço na página de registro do usuário
 
         Scenario: Cadastrar usuário com senha contendo 30 caracteres
@@ -203,6 +203,14 @@ Feature: Criar usuário
             |  ConfSenhaUsuario  |      Elma12345       |
             Then visualizo a mensagem "As senhas não conferem."
             And permaneço na página de registro do usuário
+
+        Scenario: Cadastrar usuário com erro no servidor
+            When registro os dados do usuário quando o servidor está com erro interno
+            |    nomeUsuario     |     Elma Chips      |
+            |    mailUsuario     | elmachips@teste.com |
+            |    senhaUsuario    |      Elma1234       |
+            |  ConfSenhaUsuario  |      Elma1234       |
+            Then visualizo a mensagem "Não foi possível efetuar seu registro. Tente novamente mais tarde."
 
         Scenario: Retornar à página de login
             When clico no botão Voltar à pagina de login
