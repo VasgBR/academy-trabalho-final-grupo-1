@@ -16,7 +16,7 @@ Background: acesso à página de login
     When method post
     Then status 200
     And match response contains {"auth": true, "session": {"token": "#string", "issued": "#number", "expires": "#number"}}
-
+    
     # @ignore
     Scenario: login com e-mail diferente
     * def payloadLogin = {email: "gabriellete@gmail.com", password: "Elma1234"}
