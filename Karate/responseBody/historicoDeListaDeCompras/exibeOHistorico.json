@@ -1,0 +1,26 @@
+[
+    {
+        "id": "#string",
+        "userId": "#string",
+        "description": "#string",
+        "active": "#boolean",
+        "createdAt": "#string",
+        "updatedAt": "#string"
+    },
+    {
+        "id": "#string",
+        "userId": "#string",
+        "description": "#string",
+        "active": "#boolean",
+        "createdAt": "#string",
+        "updatedAt": "#string"
+    },
+    {
+        "id": "#string",
+        "userId": "#string",
+        "description": "#string",
+        "active": "#boolean",
+        "createdAt": "#string",
+        "updatedAt": "#string"
+    }
+]
