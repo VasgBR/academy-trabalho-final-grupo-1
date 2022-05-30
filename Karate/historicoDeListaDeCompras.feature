@@ -47,14 +47,25 @@ Feature: Histórico de lista de compras
             And match response contains {message: "Invalid token."}
             * def cancelar = call read("hook.feature@cancelar")
         
-       #@ignore
+       # @ignore
         Scenario: Exibe itens da listas de compras inativa do usuário
             And path "history"
             And header X-JWT-Token = userToken
             And path idList
             When method get
             Then status 200
-            And match response contains {description: "#string", items: [{ id: "#string", listId: "#string", name: "#string", amount: "#number", createdAt: "#string", updatedAt: "#string"}]}
+            And match response contains read("responseBody/historicoDeListaDeCompras/exibeItensDasListas.json")
+            And match response == "#array"
+            * def cancelar = call read("hook.feature@cancelar")
+
+        # @ignore
+        Scenario: Encontrar lista inativa com Credenciais Inválidas
+            Given path "history"
+            And header X-JWT-Token = userToken + "0"
+            And path idList
+            When method get
+            Then status 401
+            And match response contains {status: 401, message: "Invalid token."}
             And match response == "#object"
             * def cancelar = call read("hook.feature@cancelar")
 
