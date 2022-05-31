@@ -1,5 +1,18 @@
 import { perfilPage } from "../pages/perfilPage.po"
 
+var {
+    Before,
+    After
+  } = require("cypress-cucumber-preprocessor/steps");
+
+Before({tags: "@perfil"}, () => {
+
+});
+
+After({tags: "@perfil"}, () => {
+    perfilPage.deslogar();    
+});
+
 Given("que acessei o site Lembra Compras", () => {
     perfilPage.logarUsuario();
 });
@@ -22,10 +35,12 @@ When("insiro um email já cadastrado", (tabela) => {
     var dados = tabela.rowsHash();
     perfilPage.emailJaCadastrado(dados.email);
 });
+
 When("atualizo o nome do usuário para conter 100 caracteres", (tabela) => {
     var dados = tabela.rowsHash();
     perfilPage.nomeAteCemCaracteres(dados.nomeCompleto);
 });
+
 When("atualizo o nome do usuário para conter 101 caracteres", (tabela) => {
     var dados = tabela.rowsHash();
     perfilPage.nomeMaisCemCaracteres(dados.nomeCompleto);
@@ -55,6 +70,6 @@ When("atualizo um email inválido", (tabela) => {
     perfilPage.emailInvalido(dados.email); 
 });
 Then("visualizo a mensagem {string}", (mensagem) => {
-     perfilPage.validarMensagem(mensagem).should("be.visible");
+     perfilPage.validarMensagem(mensagem);
 });
 
