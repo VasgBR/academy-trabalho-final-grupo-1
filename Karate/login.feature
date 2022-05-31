@@ -18,16 +18,16 @@ Background: acesso à página de login
     And match response contains {"auth": true, "session": {"token": "#string", "issued": "#number", "expires": "#number"}}
     
     # @ignore
-    Scenario: login com e-mail diferente
-    * def payloadLogin = {email: "gabriellete@gmail.com", password: "Elma1234"}
+    Scenario: login com e-mail não cadastrado
+    * def payloadLogin = {email: "elmaelma@teste.com", password: "Elma1234"}
     And request payloadLogin
     When method post
     Then status 403
     And match response contains {"error": "Invalid email or password."}
 
     # @ignore
-    Scenario: login com senha diferente
-    * def payloadLogin = {email: "#(userEmail)", password: "Teste1234"}
+    Scenario: login com senha não cadastrada
+    * def payloadLogin = {email: "#(userEmail)", password: "1234Elma"}
     And request payloadLogin
     When method post
     Then status 403
