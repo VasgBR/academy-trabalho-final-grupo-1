@@ -1,4 +1,4 @@
 {
     "testFiles": "**/*.feature",
-    "experimentalSessionAndOrigin": true
+    "baseUrl": "https://academy-lembra-compras.herokuapp.com/"
 }
