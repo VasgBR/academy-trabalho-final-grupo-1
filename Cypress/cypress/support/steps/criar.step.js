@@ -146,8 +146,16 @@ When ("registro os dados do usuário quando o servidor está com erro interno", 
         });
 });
 
+When ("clico no ícone olho do campo senha", () => {
+    criarPage.clicarIconeOlhoSenha();
+});
+
+When ("clico no ícone olho do campo confirmar senha", () => {
+    criarPage.clicarIconeOlhoConfSenha();
+});
+
 Then ("visualizo a mensagem {string}", (mensagemCadastro) => {
-    cy.contains(mensagemCadastro).should("be.visible");
+    criarPage.verificarMensagemTela(mensagemCadastro);
 });
 
 Then ("visualizo a senha do usuário no campo senha", () => {
@@ -158,19 +166,12 @@ Then ("visualizo a senha do usuário no campo confirmar senha", () => {
     criarPage.testeAtributoConfSenha();
 });
 
-And ("sou direcionado para a página de login", () => {
-    cy.url().should("eq", "https://academy-lembra-compras.herokuapp.com/login")
+Then ("sou direcionado para a página de login", () => {
+    criarPage.verificarUrlLogin();
 });
 
-And ("permaneço na página de registro do usuário", () => {
-    cy.url().should("eq", "https://academy-lembra-compras.herokuapp.com/register")
+Then ("permaneço na página de registro do usuário", () => {
+    criarPage.verificarUrlRegistro();
 });
 
-And ("clico no ícone olho do campo senha", () => {
-    criarPage.clicarIconeOlhoSenha();
-});
-
-And ("clico no ícone olho do campo confirmar senha", () => {
-    criarPage.clicarIconeOlhoConfSenha();
-});
 
