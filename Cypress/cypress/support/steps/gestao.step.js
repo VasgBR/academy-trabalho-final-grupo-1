@@ -1,11 +1,26 @@
 import { gestaoPage } from '../pages/gestaoPage.po'
 
+const { Before, After } = require("cypress-cucumber-preprocessor/steps");
+
+Before({ tags: '@gestãoCadastro'}, () => {
+    gestaoPage.cadastrar();
+})
+
+After({ tags: '@gestãoLogout'}, () => {
+    gestaoPage.logout();
+})
+
+After({ tags: '@gestãoFinalizar'}, () => {
+    gestaoPage.finalizarLogout();
+})
+
 Given('acessei o site Lembra Compras e estou na página de Lista', () => {
     gestaoPage.paginaLista();
 })
 
-Given('tenho uma lista criada', () => {
-    gestaoPage.listaCriada();
+Given('tenho uma lista criada', (tabela) => {
+    var dadosTabela = tabela.rowsHash();
+    gestaoPage.salvarUmItem(dadosTabela.nomeProduto, dadosTabela.quantidade);
 })
 
 When('adiciono um produto na lista', (tabela) => {

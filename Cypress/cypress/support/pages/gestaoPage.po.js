@@ -14,14 +14,17 @@ class GestãoPage{
     cancelar = '.lcjWUB'
     tresBarrinhas = '.bgBaRw'
 
-    paginaLista() {
+    cadastrar() {
         cy.visit('https://academy-lembra-compras.herokuapp.com/register')
         cy.get(this.nome).type('Elma Chips');
         cy.get(this.emailUsuario).type('elmachips@teste.com');
         cy.get(this.senhaUsuario).type('Elma1234');
         cy.get(this.confirmarSenhaUsuario).type('Elma1234');
         cy.contains('Registrar').click();
-        cy.visit('https://academy-lembra-compras.herokuapp.com/lista');
+    }
+     
+    paginaLista() {
+        cy.visit('https://academy-lembra-compras.herokuapp.com/login');
         cy.get(this.emailUsuario).type('elmachips@teste.com');
         cy.get(this.senhaUsuario).type('Elma1234');
         cy.contains('Entrar').click();
@@ -38,9 +41,7 @@ class GestãoPage{
     }
 
     removiProduto() {
-        cy.contains('Cebolitos').should('not.exist')
-        cy.get(this.tresBarrinhas).click({force: true})
-        cy.contains('Sair').click({force: true});
+        cy.contains('Cebolitos').should('not.exist');
     }
 
     nomeDaLista(nomeLista) {
@@ -53,7 +54,6 @@ class GestãoPage{
 
     mensagemSucesso(mensagemSucesso) {
         cy.contains(mensagemSucesso).should('be.visible');
-        cy.contains('Finalizar a lista').click().get(this.confirmar).click();
     }
 
     salvarUmItem(nomeProduto, quantidade) {
@@ -69,7 +69,6 @@ class GestãoPage{
 
     itemRiscado() {
         cy.get(this.riscado).should('be.visible');
-        cy.contains('Finalizar a lista').click().get(this.confirmar).click();
     }
 
     finalizarLista() {
@@ -96,12 +95,9 @@ class GestãoPage{
 
     somaQuantidade() {
         cy.contains('4' + 'x - ' + 'Cebolitos').should('be.visible');
-        cy.contains('Finalizar a lista').click().get(this.confirmar).click();
     }
 
     salvarPeloMenosUm(nomeProduto, quantidade) {
-        cy.contains('Finalizar a lista').click().get(this.confirmar).click();
-        cy.wait(2500);
         cy.get(this.nome).type(nomeProduto);
         cy.get(this.quantidade).clear().type(quantidade);
         cy.contains('button', '+').click();
@@ -112,7 +108,6 @@ class GestãoPage{
     produtosNaLista() {
         cy.get(this.produto).eq(0).should('be.visible');
         cy.get(this.produto).eq(1).should('be.visible');
-        cy.contains('Finalizar a lista').click().get(this.confirmar).click();
     }
 
     adicionarProdutos(nomeProduto, quantidade) {
@@ -127,7 +122,7 @@ class GestãoPage{
         cy.get(this.nome).type(nomeProduto);
         cy.get(this.quantidade).clear().type(quantidade);
         cy.contains('button', '+').click();
-        cy.wait(1000);
+        cy.wait(500);
     }
 
     produto1000(nomeProduto, quantidade) {
@@ -147,13 +142,21 @@ class GestãoPage{
         cy.wait(2000);
     }
 
-    listaCriada() {
-        cy.contains('Finalizar a lista').should('be.visible');
-    }
-
     atualizarPagina() {
         cy.contains('Histórico').click();
         cy.contains('Lista').click();
+    }
+
+    logout() {
+        cy.get(this.tresBarrinhas).click({force: true});
+        cy.contains('Sair').click({force: true});
+    }
+
+    finalizarLogout() {
+        cy.contains('Finalizar a lista').click({force: true});
+        cy.contains('Confirmar').click({force: true});
+        cy.get(this.tresBarrinhas).click({force: true});
+        cy.contains('Sair').click({force: true});
     }
 }
 
