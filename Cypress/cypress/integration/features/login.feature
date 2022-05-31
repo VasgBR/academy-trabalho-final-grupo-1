@@ -4,17 +4,18 @@ Desejo realizar meu acesso na aplicação
 Para conseguir utilizar os serviços do Lembra Compras.
 
 Background: acesso à página de login
-    Given que eu tenha um cadastro prévio na aplicação
-    |    mailUsuario     | elmachips@teste.com |
-    |    senhaUsuario    |      Elma1234       |
     And acessei a página de login
 
     Scenario: login com sucesso
+        Given que eu tenha um cadastro prévio na aplicação
+        |    nomeUsuario     |     Elma Chips      |
+        |    mailUsuario     | elmachips@teste.com |
+        |    senhaUsuario    |      Elma1234       |
+        |  ConfSenhaUsuario  |      Elma1234       |
         When faço login com os dados cadastrados
         |    mailUsuario     | elmachips@teste.com |
         |    senhaUsuario    |      Elma1234       |
-        Then o usuário é autenticado
-        And sou direcionado para a página de lista
+        Then sou direcionado para a página de lista
 
     Scenario: login com e-mail não cadastrado
         When faço login com um e-mail não cadastrado
@@ -35,14 +36,12 @@ Background: acesso à página de login
         |    mailUsuario     |                     |
         |    senhaUsuario    |      Elma1234       |
         Then visualizo a mensagem "Informe seu e-mail"
-        And o campo de e-mail é ativado para inserção
 
     Scenario: login sem senha
         When faço login sem inserir senha
         |    mailUsuario     | elmachips@teste.com |
         |    senhaUsuario    |                     |
         Then visualizo a mensagem "Informe sua senha"
-        And o campo de senha é ativado para inserção
 
     Scenario: login sem e-mail e senha
         When faço login sem inserir e-mail e senha
@@ -50,8 +49,7 @@ Background: acesso à página de login
         |    senhaUsuario    |                     |
         Then visualizo a mensagem "Informe seu e-mail"
         And visualizo a mensagem "Informe sua senha"
-        And o campo de e-mail é ativado para inserção
 
     Scenario: ir para a página de register
-        When clico no botão "Registre-se"
+        When clico no botão Registre-se
         Then sou direcionado para a página de register
