@@ -2,7 +2,7 @@
 
 ##  Sobre o projeto
 
-📋 O Sistema Lembra Compras é ser uma aplicação que auxilia seus usuários a lembrarem de produtos a serem comprados durante a ida à comércios do dia à dia, como supermercados, padarias, mercearias, etc.
+📋 O Sistema Lembra Compras é uma aplicação que auxilia seus usuários a lembrarem de produtos a serem comprados durante a ida à comércios do dia à dia, como supermercados, padarias, mercearias, etc.
 
 Os usuários podem se cadastrar para ter acesso a aplicação, o que permite cadastrar suas listas e, posteriormente, consultar as compras que já foram feitas anteriormente, permitindo controle e reutilização destas informaçõs para a elaboração de listas futuras.
 
