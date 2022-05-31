@@ -9,7 +9,7 @@ Feature: Perfil
 
         Scenario: Atualizar nome com sucesso
             When atualizo o nome 
-            | nome completo | Elma Chips Queijo |
+            | nomeCompleto | Elma Chips Queijo |
             Then visualizo a mensagem "Informações atualizadas com sucesso!"
 
         Scenario: Atualizar email com sucesso
@@ -19,7 +19,7 @@ Feature: Perfil
 
         Scenario: Novo e-mail não pode ser existente 
             When insiro um email já cadastrado 
-            | e-mail | elmachips@queijo.com |
+            | email | elmachips@queijo.com |
             Then visualizo a mensagem "Este e-mail já é utilizado por outro usuário."
         
         Scenario: Atualizar usuário com nome contendo 100 caracteres
@@ -40,12 +40,12 @@ Feature: Perfil
         Scenario: Atualizar usuário com email contendo 61 caracteres
             When atualizo o email do usuário para conter 61 caracteres
             | email | elmachipsssssssssssssssssssssssssssssssssssssssssss@teste.com |  
-            Then vizualizo a mensagem "Informe no máximo 60 letras no seu email"
+            Then visualizo a mensagem "Informe no máximo 60 letras no seu email"
             
         Scenario: O nome deve conter no mínimo 4 letras
             When atualizo o campo nome completo para ter menos de 4 letras  
             | Nome completo | Elm | 
-            Then vizualizo a mensagem "Informe seu nome completo"
+            Then visualizo a mensagem "Informe seu nome completo"
 
         Scenario: Inserindo caractere especial no nome
             When atualizo o campo nome completo com caractere especial 
