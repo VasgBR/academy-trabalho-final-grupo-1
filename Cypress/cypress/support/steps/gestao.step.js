@@ -1,13 +1,5 @@
 import { gestaoPage } from '../pages/gestaoPage.po'
 
-before(() => {
-    gestaoPage.usuario();
-})
-
-afterEach(() => {
-    gestaoPage.deslogar();
-})
-
 Given('acessei o site Lembra Compras e estou na página de Lista', () => {
     gestaoPage.paginaLista();
 })
