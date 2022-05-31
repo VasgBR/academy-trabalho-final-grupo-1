@@ -30,26 +30,18 @@ Feature: Histórico de lista de compras
             * def cancelar = call read("hook.feature@cancelar")
 
         # @ignore
-        Scenario: Exibe o histórico de no máximo 10 listas de compras do usuário
-            And header X-JWT-Token = userToken
-            And path "history"
-            When method get
-            Then status 200
-            And match response contains {id: "#string", userId: "#string", description: "#string", active: "#boolean", createdAt: "#string", updatedAt: "#string"}
-            * def cancelar = call read("hook.feature@cancelar")
-
-        # @ignore
-        Scenario: Usuário com token diferente
-            And header X-JWT-Token = "0"
+        Scenario: Histórico de listas com Credenciais Inválidas
+            Given header X-JWT-Token = "0"
             And path "history"
             When method get
             Then status 401
-            And match response contains {message: "Invalid token."}
+            And match response contains {status: 401, message: "Invalid token."}
+            And match response == "#object"
             * def cancelar = call read("hook.feature@cancelar")
         
-       # @ignore
-        Scenario: Exibe itens da listas de compras inativa do usuário
-            And path "history"
+        # @ignore
+        Scenario: Exibe itens das listas de compras inativa do usuário
+            Given path "history"
             And header X-JWT-Token = userToken
             And path idList
             When method get
@@ -66,5 +58,16 @@ Feature: Histórico de lista de compras
             When method get
             Then status 401
             And match response contains {status: 401, message: "Invalid token."}
+            And match response == "#object"
+            * def cancelar = call read("hook.feature@cancelar")
+
+        # @ignore
+        Scenario: Lista não criada
+            Given path "history"
+            And header X-JWT-Token = userToken
+            And path "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+            When method get
+            Then status 404
+            And match response contains {error: "List not found."}
             And match response == "#object"
             * def cancelar = call read("hook.feature@cancelar")

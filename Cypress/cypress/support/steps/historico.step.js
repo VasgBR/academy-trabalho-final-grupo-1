@@ -1,19 +1,29 @@
 import {historicoPage} from "../pages/HistoricoPage.po";
 
-before(() => {
+const { Before, After } = require("cypress-cucumber-preprocessor/steps");
+
+Before({tags: '@historicoCadastro'}, () => {
     historicoPage.cadastro();
 })
 
-//afterEach(() => {
-  //  historicoPage.deslogar();
-//})
+After({tags: '@historicoLogout'}, () => {
+   historicoPage.deslogar();
+})
 
 Given('que acessei o site Lembra Compras', () =>{
     historicoPage.login();
 })
 
-When('tenho listas cadastradas', () => {
+Given('acessei a página histórico', () =>{
+    historicoPage.visualizarListas();
+})
+
+Given('tenho listas cadastradas', () => {
     historicoPage.adicionarItem();
+})
+
+When('clico em uma das listas cadastradas', () =>{
+    historicoPage.visualizarItensLista();
 })
 
 When('adicionei um produto na lista', (tabela) => {
@@ -21,10 +31,10 @@ When('adicionei um produto na lista', (tabela) => {
     historicoPage.adicionarProduto(dadosTabela.produto, dadosTabela.quantidade);
 })
 
-Given('acessei a página histórico', () =>{
-    historicoPage.visualizarListas();
+Then('o sistema deve mostrar o nome e a data de criação apenas das 10 últimas listas cadastradas', () => {
+    historicoPage.visualizarLista();
 })
 
-Given('clico em uma das listas cadastradas', () =>{
-    historicoPage.visualizarItensLista();
+Then('o sistema mostra todos os itens e quantidades dos produtos cadastrados na lista de compras', () => {
+    historicoPage.nomeQuantidade();
 })

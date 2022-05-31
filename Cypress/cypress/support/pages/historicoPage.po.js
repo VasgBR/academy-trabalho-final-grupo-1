@@ -8,25 +8,24 @@ class HistoricoPage {
     confirmar = '.iMjKmA'
     listagem = ".kUIcKA"
     menu = '.bgBaRw'
+    item = '.laysmB'
     
-
     cadastro(){
         cy.visit('https://academy-lembra-compras.herokuapp.com/register');
         cy.get(this.nome).type('Elma Chips');
-        cy.get(this.email).type('el@t4111.com');
-        cy.get(this.senha).type('1234');
-        cy.get(this.confirmaSenha).type('1234');
+        cy.get(this.email).type('elmachips@teste.com');
+        cy.get(this.senha).type('Elma1234');
+        cy.get(this.confirmaSenha).type('Elma1234');
         cy.contains("button", 'Registrar').click();
     }
 
     login(){
         cy.visit('https://academy-lembra-compras.herokuapp.com/login');
-        cy.get(this.email).type('el@t4111.com');
-        cy.get(this.senha).type('1234');
+        cy.get(this.email).type('elmachips@teste.com');
+        cy.get(this.senha).type('Elma1234');
         cy.contains('Entrar').click(); 
+        cy.wait(1000);
     }
-
-    //criarOnzeListas??
 
     salvarLista() {
         cy.contains('Salvar').click();
@@ -41,7 +40,6 @@ class HistoricoPage {
 
     }
 
-   
     paginaListaCriada(){
         cy.contains('Finalizar a lista').should('be.visible');
         cy.contains('Finalizar a lista').click().get('.iMjKmA').click();
@@ -53,8 +51,8 @@ class HistoricoPage {
         cy.contains('Confirmar').click(); 
     }
 
-    visualizaListas(){
-        cy.contains('Histórico').click();
+    visualizarListas(){
+        cy.contains('Histórico').click({force: true});
     }
 
     visualizarItensLista(){
@@ -77,7 +75,7 @@ class HistoricoPage {
     }
 
     visualizarItensLista(){
-        cy.get(this.lisatagem).eq(0).click();
+        cy.get(this.listagem).eq(0).click({force: true});
     }
 
     visualizaListas(){
@@ -87,6 +85,48 @@ class HistoricoPage {
     deslogar() {
         cy.get(this.menu).click({force: true})
         cy.contains('Sair').click({force: true});
+    }
+
+    adicionarItem() {
+        cy.get(this.nome).type('Cebolitos');
+        cy.get(this.quantidade).clear().type('2');
+        cy.contains('button', '+').click();
+        cy.contains('Salvar').click();
+        cy.contains('Finalizar a lista').click();
+        cy.contains('Confirmar').click();
+        cy.wait(2500);
+        cy.get(this.nome).type('Cebolitos');
+        cy.get(this.quantidade).clear().type('2');
+        cy.contains('button', '+').click();
+        cy.contains('Salvar').click();
+        cy.contains('Finalizar a lista').click();
+        cy.contains('Confirmar').click();
+        cy.wait(2500);
+        cy.get(this.nome).type('Cebolitos');
+        cy.get(this.quantidade).clear().type('2');
+        cy.contains('button', '+').click();
+        cy.contains('Salvar').click();
+        cy.contains('Finalizar a lista').click();
+        cy.contains('Confirmar').click();
+        cy.wait(2500);
+        cy.get(this.nome).type('Cebolitos');
+        cy.get(this.quantidade).clear().type('2');
+        cy.contains('button', '+').click();
+        cy.contains('Salvar').click();
+        cy.contains('Finalizar a lista').click();
+        cy.contains('Confirmar').click();
+        cy.wait(2500);
+        cy.get(this.nome).type('Cebolitos');
+        cy.get(this.quantidade).clear().type('2');
+        cy.contains('button', '+').click();
+        cy.contains('Salvar').click();
+        cy.contains('Finalizar a lista').click();
+        cy.contains('Confirmar').click();
+        cy.wait(2500);
+    }
+
+    nomeQuantidade() {
+        cy.get(this.item).should('be.visible');
     }
 };
 
