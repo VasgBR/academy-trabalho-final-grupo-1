@@ -211,6 +211,7 @@ Feature: Criar usuário
             |    senhaUsuario    |      Elma1234       |
             |  ConfSenhaUsuario  |      Elma1234       |
             Then visualizo a mensagem "Não foi possível efetuar seu registro. Tente novamente mais tarde."
+            And permaneço na página de registro do usuário
 
         Scenario: Retornar à página de login
             When clico no botão Voltar à pagina de login

@@ -71,6 +71,18 @@ class CriarPage {
         cy.get(this.buttonVoltar).click();
     }
 
+    verificarMensagemTela(mensagemCadastro) {
+        cy.contains(mensagemCadastro).should("be.visible");
+    }
+
+    verificarUrlLogin() {
+        cy.url().should("eq", "https://academy-lembra-compras.herokuapp.com/login")
+    }
+
+    verificarUrlRegistro() {
+        cy.url().should("eq", "https://academy-lembra-compras.herokuapp.com/register")
+    }
+
 }
 
 export var criarPage = new CriarPage();
