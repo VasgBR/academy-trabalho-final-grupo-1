@@ -11,7 +11,7 @@ Feature: Perfil
         * def login = call read("hook.feature@login")
         * def userToken = login.response.session.token
         
-        @ignore
+        
         Scenario: Atualizar nome com sucesso
             * def payload = {name: "Elma Chips Queijo", email: "#(userEmail)"} 
             And header X-JWT-Token = userToken  
@@ -22,7 +22,7 @@ Feature: Perfil
             And match response contains {id: "#string", name: "Elma Chips Queijo", email: "#(userEmail)", is_admin: "#boolean", createdAt: "#string", updatedAt: "#string"}
             * def cancelar = call read("hook.feature@cancelar")
 
-        @ignore
+        
         Scenario: Atualizar email com sucesso 
             * def payload = {name: "Elma Chips", email: "#(userEmail)"}
             And header X-JWT-Token = userToken
@@ -33,7 +33,7 @@ Feature: Perfil
             And match response contains {id: "#string", name: "Elma Chips", email: "#(userEmail)", is_admin: "#boolean", createdAt: "#string", updatedAt: "#string"} 
             * def cancelar = call read("hook.feature@cancelar")
 
-        @ignore
+        
         Scenario: Novo e-mail não pode ser existente
             * def criarDois = call read("hook.feature@criar")
             * def userEmail2 = criarDois.response.email
@@ -43,7 +43,7 @@ Feature: Perfil
             Then status 422
             * def cancelar = call read("hook.feature@cancelar") 
             
-        @ignore
+        
         Scenario: Atualizar usuário com nome contendo 100 caracteres
             * def payload = {name: "Elma Chipsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss", email: "#(userEmail)"}
             And header X-JWT-Token = userToken
@@ -54,7 +54,7 @@ Feature: Perfil
             And match response contains {id: "#string", name: "Elma Chipsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss", email: "#(userEmail)", is_admin: "#boolean", createdAt: "#string",updatedAt: "#string"}
             * def cancelar = call read("hook.feature@cancelar")
 
-        @ignore
+        
         Scenario: Atualizar usuário com email contendo 60 caracteres
             * def payload = {name: "Elma Chips", email: "elmachipssssssssssssssssssssssssssssssssssssssssss@teste.com"}
             And header X-JWT-Token = userToken
@@ -65,7 +65,7 @@ Feature: Perfil
             And match response contains {id: "#string", name: "Elma Chips", email: "elmachipssssssssssssssssssssssssssssssssssssssssss@teste.com", is_admin: "#boolean", createdAt: "#string", updatedAt: "#string"}
             * def cancelar = call read("hook.feature@cancelar")     
 
-        @ignore
+        
         Scenario: Atualizar usuário com nome contendo 101 caracteres
             * def payload = {name: "Elma Chipssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss", email: "#(userEmail)"}
             And header X-JWT-Token = userToken
@@ -76,7 +76,7 @@ Feature: Perfil
             And match response contains {error: "Bad request."}
             * def cancelar = call read("hook.feature@cancelar")
 
-        @ignore 
+         
         Scenario: Atualizar usuário com email contendo 61 caracteres
             * def payload = {name: "Elma Chips", email: "elmachipsssssssssssssssssssssssssssssssssssssssssss@teste.com"}
             And header X-JWT-Token = userToken 
@@ -87,7 +87,7 @@ Feature: Perfil
             And match response contains {error: "Bad request."}
             * def cancelar = call read("hook.feature@cancelar")
 
-        @ignore
+        
         Scenario: Inserindo email inválido 
             * def payload = {name: "Elma Chips", email: "elmachips@"}
             And header X-JWT-Token = userToken
@@ -97,8 +97,8 @@ Feature: Perfil
             And match response == "#object"
             And match response contains {error: "Bad request."}
 
-        @ignore
-        Scenario: Inserindo usuário já cadastrado 
+        
+        Scenario: Usuário não encontrado 
             * def payload = {name: "Elma chips", email: "elma@chips.com"}
             And header X-JWT-Token = null
             And request payload
@@ -107,7 +107,7 @@ Feature: Perfil
             And match response == "#object"
             And match response contains {error: "User not found."} 
 
-        @ignore
+        
         Scenario: Buscando usuário com sucesso
             * def userId = criar.response.id
             * def userName = criar.response.name
@@ -117,7 +117,7 @@ Feature: Perfil
             Then status 200
             And match response contains {id: "#(userId)", name: "#(userName)", email: "#(userEmail)", is_admin: false, createdAt: "#string",updatedAt: "#string"}
 
-        @ignore
+        
         Scenario: Buscando usuário com token inválido
             * def userId = criar.response.id
             And path userId 
@@ -126,7 +126,7 @@ Feature: Perfil
             Then status 401
             And match response contains {status: 401, message: "Invalid token."} 
 
-        @ignore 
+         
         Scenario: Buscando usuário por Id inválido  
             * def userId = criar.response.id
             And path userId + "salgadinho" 
@@ -135,7 +135,7 @@ Feature: Perfil
             Then status 400 
             And match response contains {error: "Bad request."} 
 
-        @ignore 
+         
         Scenario: Não informar o Id do usuário 
             And path null
             And header X-JWT-Token = userToken
