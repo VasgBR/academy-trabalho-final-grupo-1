@@ -1,4 +1,3 @@
 {
-    "testFiles": "**/*.feature",
-    "experimentalSessionAndOrigin": true
+    "testFiles": "**/*.feature"
 }
