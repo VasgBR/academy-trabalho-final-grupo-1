@@ -15,17 +15,18 @@ Feature: Histórico de lista de compras
         * def idList = listaRetorna.response.items[0].idList
         * def listaInativa = call read("hook.feature@listaInativa")
        
-        @ignore
+        # @ignore
         Scenario: Exibe o histórico de listas de compras do usuário
-            And header X-JWT-Token = userToken
+            Given header X-JWT-Token = userToken
             And path "history"
             * def lista1 = call read("hook.feature@lista")
             * def listaInativa1 = call read("hook.feature@listaInativa")
             * def lista2 = call read("hook.feature@lista")
-            * def listaInativa2= call read("hook.feature@listaInativa")
+            * def listaInativa2 = call read("hook.feature@listaInativa")
             When method get
             Then status 200
-            And match response contains {id: "#string", userId: "#string", description: "#string", active: "#boolean", createdAt: "#string", updatedAt: "#string"}
+            And match response contains read("responseBody/historicoDeListaDeCompras/exibeOHistorico.json")
+            And match response == "#array"
             * def cancelar = call read("hook.feature@cancelar")
 
         # @ignore
@@ -37,7 +38,6 @@ Feature: Histórico de lista de compras
             And match response contains {id: "#string", userId: "#string", description: "#string", active: "#boolean", createdAt: "#string", updatedAt: "#string"}
             * def cancelar = call read("hook.feature@cancelar")
 
-
         # @ignore
         Scenario: Usuário com token diferente
             And header X-JWT-Token = "0"
@@ -47,17 +47,24 @@ Feature: Histórico de lista de compras
             And match response contains {message: "Invalid token."}
             * def cancelar = call read("hook.feature@cancelar")
         
-       @ignore
+       # @ignore
         Scenario: Exibe itens da listas de compras inativa do usuário
             And path "history"
             And header X-JWT-Token = userToken
             And path idList
             When method get
             Then status 200
-            And match response contains {id: "#string", listId: "#string", name: "#string", amount: "#number", createdAt: "#string", updatedAt: "#string"}
-            And match response == "#object"
+            And match response contains read("responseBody/historicoDeListaDeCompras/exibeItensDasListas.json")
+            And match response == "#array"
             * def cancelar = call read("hook.feature@cancelar")
 
-
-
-            
+        # @ignore
+        Scenario: Encontrar lista inativa com Credenciais Inválidas
+            Given path "history"
+            And header X-JWT-Token = userToken + "0"
+            And path idList
+            When method get
+            Then status 401
+            And match response contains {status: 401, message: "Invalid token."}
+            And match response == "#object"
+            * def cancelar = call read("hook.feature@cancelar")
