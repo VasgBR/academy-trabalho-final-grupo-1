@@ -141,15 +141,7 @@ Feature: Perfil
             And header X-JWT-Token = userToken
             When method get 
             Then status 403 
-            And match response contains {error: "User does not have sufficient access for this request."}
-
-        #@ignore
-        Scenario:
-            * def userId = criar.response.id
-            And path    
-            And header X-JWT-Token = userToken 
-            When method get 
-            Then status 404   
+            And match response contains {error: "User does not have sufficient access for this request."}  
 
         
 

@@ -1,18 +1,10 @@
 import { perfilPage } from "../pages/perfilPage.po"
 
-before( () => {
-    perfilPage.registrarUsuario();
-});
-
-afterEach( () => {
-    perfilPage.deslogarUsuario();
-});
-
 Given("que acessei o site Lembra Compras", () => {
     perfilPage.logarUsuario();
 });
 
-When("na página Perfil", () => {
+Given("na página Perfil", () => {
     perfilPage.acessarPaginaPerfil();
 });
 
@@ -63,6 +55,6 @@ When("atualizo um email inválido", (tabela) => {
     perfilPage.emailInvalido(dados.email); 
 });
 Then("visualizo a mensagem {string}", (mensagem) => {
-    cy.contains(mensagem);
+     perfilPage.validarMensagem(mensagem).should("be.visible");
 });
 

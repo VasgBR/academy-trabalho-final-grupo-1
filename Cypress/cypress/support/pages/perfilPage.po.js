@@ -7,30 +7,19 @@ class perfilUsuario {
     botaoConfirmarAlteracoes = ".jmKUXo"
     botaoConfirmar = ".iMjKmA"
     
-    registrarUsuario() {
+    logarUsuario() {
         cy.visit("https://academy-lembra-compras.herokuapp.com/register");
         cy.get(this.nameUsuario).type("Elma Chips");
         cy.get(this.emailUsuario).type("elmachips@presunto.com");
         cy.get(this.senhaUsuario).type("Elma1234");
         cy.get(this.confirmarSenhaUsuario).type("Elma1234");
         cy.contains("button", "Registrar").click({force: true});
-        cy.visit("https://academy-lembra-compras.herokuapp.com/register");
-        cy.get(this.nameUsuario).type("Elma Chips");
-        cy.get(this.emailUsuario).type("elmachips@queijo.com");
-        cy.get(this.senhaUsuario).type("Elma1234");
-        cy.get(this.confirmarSenhaUsuario).type("Elma1234");
-        cy.contains("button", "Registrar").click({force: true});
-    }
-    logarUsuario() {
         cy.visit("/login");
         cy.get(this.emailUsuario).type("elmachips@presunto.com");
         cy.get(this.senhaUsuario).type("Elma1234");
         cy.contains("Entrar").click();
     }
-    deslogarUsuario() {
-        cy.get('.bgBaRw').click({force: true}); 
-        cy.contains("Sair").click({force: true});
-    }
+    
     acessarPaginaPerfil() {
         cy.get('.bgBaRw').click({force: true});   
         cy.contains("Perfil").click({force: true});
@@ -48,6 +37,18 @@ class perfilUsuario {
         cy.get(this.botaoConfirmar).click();
     }
     emailJaCadastrado(email) {
+        cy.visit("https://academy-lembra-compras.herokuapp.com/register");
+        cy.get(this.nameUsuario).type("Elma Chips");
+        cy.get(this.emailUsuario).type("elmachips@queijo.com");
+        cy.get(this.senhaUsuario).type("Elma1234");
+        cy.get(this.confirmarSenhaUsuario).type("Elma1234");
+        cy.contains("button", "Registrar").click({force: true});
+        cy.visit("/login");
+        cy.get(this.emailUsuario).type("elmachips@presunto.com");
+        cy.get(this.senhaUsuario).type("Elma1234");
+        cy.contains("Entrar").click();
+        cy.get('.bgBaRw').click({force: true});   
+        cy.contains("Perfil").click({force: true});
         cy.wait(500);
         cy.get(this.emailUsuario).clear().type(email);
         cy.get(this.botaoConfirmarAlteracoes).click();
@@ -95,6 +96,9 @@ class perfilUsuario {
         cy.wait(1000);
         cy.get(this.emailUsuario).clear().type(email);
         cy.get(this.botaoConfirmarAlteracoes).click();
+    }
+    validarMensagem(mensagem) {
+        cy.contains(mensagem);
     }
 
 
