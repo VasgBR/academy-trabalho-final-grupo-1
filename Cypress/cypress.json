@@ -1,4 +1,4 @@
 {
-    "testFiles": "**/*.feature",
-    "baseUrl": "https://academy-lembra-compras.herokuapp.com/"
+    "baseUrl": "https://academy-lembra-compras.herokuapp.com",
+    "testFiles": "**/*.feature"
 }

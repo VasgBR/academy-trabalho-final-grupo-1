@@ -99,7 +99,7 @@ Feature: Perfil
 
         @ignore
         Scenario: Inserindo usuário já cadastrado 
-            * def payload = {name: "Elma chips", email: "elma@"}
+            * def payload = {name: "Elma chips", email: "elma@chips.com"}
             And header X-JWT-Token = null
             And request payload
             When method put 
@@ -107,8 +107,41 @@ Feature: Perfil
             And match response == "#object"
             And match response contains {error: "User not found."} 
 
+        @ignore
+        Scenario: Buscando usuário com sucesso
+            * def userId = criar.response.id
+            * def userName = criar.response.name
+            And path userId
+            And header X-JWT-Token = userToken
+            When method get
+            Then status 200
+            And match response contains {id: "#(userId)", name: "#(userName)", email: "#(userEmail)", is_admin: false, createdAt: "#string",updatedAt: "#string"}
 
+        @ignore
+        Scenario: Buscando usuário com token inválido
+            * def userId = criar.response.id
+            And path userId 
+            And header X-JWT-Token = userToken + "0"  
+            When method get
+            Then status 401
+            And match response contains {status: 401, message: "Invalid token."} 
 
+        @ignore 
+        Scenario: Buscando usuário por Id inválido  
+            * def userId = criar.response.id
+            And path userId + "salgadinho" 
+            And header X-JWT-Token = userToken 
+            When method get 
+            Then status 400 
+            And match response contains {error: "Bad request."} 
+
+        @ignore 
+        Scenario: Não informar o Id do usuário 
+            And path null
+            And header X-JWT-Token = userToken
+            When method get 
+            Then status 403 
+            And match response contains {error: "User does not have sufficient access for this request."}  
 
         
 
