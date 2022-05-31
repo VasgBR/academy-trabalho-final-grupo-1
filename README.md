@@ -116,8 +116,8 @@ O Karate é compilado em Java, por isso temos que baixar o Java [Download](https
 3. Acesse a grade de Assets;
 4. Faça download do arquivo karate-*.*.*.jar.
 
-### Pré-requisitos para executar o Karate Framework
- O Cpress é uma ferramenta de testes, podendo ser utilizado para testes de Front-End
+### Pré-requisitos para executar o Cypress
+ O Cypress é uma ferramenta de testes, podendo ser utilizado para testes de Front-End
   
 #### Node.js
 O NodeJS é um runtime do JavaScript e permite a execução do JavaScript fora do ambiente Web, por isso temos que baixar o [NodeJS](https://nodejs.org/en/download/)
