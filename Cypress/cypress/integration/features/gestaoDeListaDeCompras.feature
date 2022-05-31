@@ -33,14 +33,14 @@ Feature: Gestão de lista de compras
             And marco a caixa de seleção do item na lista
             Then o item é riscado
 
-        # @gestãoFinalizar
-        # Scenario: Item continuar riscado após atualizar a página
-        #     When salvo a lista com pelo menos um item
-        #     | nomeProduto | Cebolitos |
-        #     | quantidade  | 2         |
-        #     And marco a caixa de seleção do item na lista
-        #     And atualizo a página
-        #     Then o item continua riscado
+        @gestãoFinalizar
+        Scenario: Item continuar riscado após atualizar a página
+            When salvo a lista com pelo menos um item
+            | nomeProduto | Cebolitos |
+            | quantidade  | 2         |
+            And marco a caixa de seleção do item na lista
+            And atualizo a página
+            Then o item continua riscado
 
         @gestãoLogout
         Scenario: Finalizar a lista
@@ -102,15 +102,15 @@ Feature: Gestão de lista de compras
             | quantidade  | 1001      |
             Then visualizo a mensagem de erro "Informe uma quantidade menor ou igual a 1000"
 
-        # @gestãoFinalizar
-        # Scenario: Aumentar a quantidade dos produtos já adicionados na lista não criada
-        #     When adiciono um produto na lista
-        #     | nomeProduto | Cebolitos |
-        #     | quantidade  | 2         |
-        #     And salvo a lista adicionando o mesmo produto novamente
-        #     | nomeProduto | Cebolitos |
-        #     | quantidade  | 2         |
-        #     Then o sistema deve somar a quantidade dos produtos adicionados
+        @gestãoFinalizar
+        Scenario: Aumentar a quantidade dos produtos já adicionados na lista não criada
+            When adiciono um produto na lista
+            | nomeProduto | Cebolitos |
+            | quantidade  | 2         |
+            And salvo a lista adicionando o mesmo produto novamente
+            | nomeProduto | Cebolitos |
+            | quantidade  | 2         |
+            Then o sistema deve somar a quantidade dos produtos adicionados
 
         @gestãoFinalizar
         Scenario: Aumentar a quantidade dos produtos já adicionados na lista criada
@@ -132,16 +132,16 @@ Feature: Gestão de lista de compras
             | quantidade  | 2       |
             Then o sistema deve me apresentar os dois produtos na lista
 
-        # @gestãoFinalizar
-        # Scenario: Adicionar um novo produto na lista criada
-        #     When salvo a lista com pelo menos um item
-        #     | nomeProduto | Cebolitos |
-        #     | quantidade  | 2         |
-        #     And adiciono outro produto na lista
-        #     | nomeProduto | Ruffles |
-        #     | quantidade  | 2       |
-        #     Then o sistema deve me apresentar os dois produtos na lista
-        #     And visualizo a mensagem de sucesso após adicionar o segundo item "Item adicionado com sucesso!"
+        @gestãoFinalizar
+        Scenario: Adicionar um novo produto na lista criada
+            When salvo a lista com pelo menos um item
+            | nomeProduto | Cebolitos |
+            | quantidade  | 2         |
+            And adiciono outro produto na lista
+            | nomeProduto | Ruffles |
+            | quantidade  | 2       |
+            Then o sistema deve me apresentar os dois produtos na lista
+            And visualizo a mensagem de sucesso após adicionar o segundo item "Item adicionado com sucesso!"
 
         @gestãoLogout
         Scenario: Aumentar a quantidade dos produtos já adicionados na lista não criada para ter uma quantidade maior que 1000

@@ -153,7 +153,8 @@ class GestãoPage{
     }
 
     finalizarLogout() {
-        cy.contains('Finalizar a lista').click().get(this.confirmar).click();
+        cy.contains('Finalizar a lista').click({force: true});
+        cy.contains('Confirmar').click({force: true});
         cy.get(this.tresBarrinhas).click({force: true});
         cy.contains('Sair').click({force: true});
     }
