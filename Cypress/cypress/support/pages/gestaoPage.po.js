@@ -14,17 +14,14 @@ class GestãoPage{
     cancelar = '.lcjWUB'
     tresBarrinhas = '.bgBaRw'
 
-    usuario() {
+    paginaLista() {
         cy.visit('https://academy-lembra-compras.herokuapp.com/register')
         cy.get(this.nome).type('Elma Chips');
         cy.get(this.emailUsuario).type('elmachips@teste.com');
         cy.get(this.senhaUsuario).type('Elma1234');
         cy.get(this.confirmarSenhaUsuario).type('Elma1234');
         cy.contains('Registrar').click();
-    }
-
-    paginaLista() {
-        cy.visit('https://academy-lembra-compras.herokuapp.com/login');
+        cy.visit('https://academy-lembra-compras.herokuapp.com/lista');
         cy.get(this.emailUsuario).type('elmachips@teste.com');
         cy.get(this.senhaUsuario).type('Elma1234');
         cy.contains('Entrar').click();
@@ -42,6 +39,8 @@ class GestãoPage{
 
     removiProduto() {
         cy.contains('Cebolitos').should('not.exist')
+        cy.get(this.tresBarrinhas).click({force: true})
+        cy.contains('Sair').click({force: true});
     }
 
     nomeDaLista(nomeLista) {
@@ -146,11 +145,6 @@ class GestãoPage{
         cy.contains('Finalizar a lista').should('be.visible');
         cy.contains('Finalizar a lista').click().get(this.confirmar).click();
         cy.wait(2000);
-    }
-
-    deslogar() {
-        cy.get(this.tresBarrinhas).click({force: true})
-        cy.contains('Sair').click({force: true});
     }
 
     listaCriada() {
